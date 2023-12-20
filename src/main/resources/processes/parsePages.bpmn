@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_05lou2q" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.13.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+  <bpmn:process id="parse_pages"
+                isExecutable="true"
+                camunda:historyTimeToLive="10000">
+    <bpmn:sequenceFlow id="Flow_1yy5ju2" sourceRef="start" targetRef="parse"/>
+    <bpmn:endEvent id="Event_1azeqdg">
+      <bpmn:incoming>Flow_0rshu56</bpmn:incoming>
+      <bpmn:incoming>Flow_1xl0f0g</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0rshu56" sourceRef="notify" targetRef="Event_1azeqdg"/>
+    <bpmn:startEvent id="start" name="Interval passed">
+      <bpmn:outgoing>Flow_1yy5ju2</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0amxjrh">
+        <bpmn:timeCycle xsi:type="bpmn:tFormalExpression">${camundaConfig.getPageParsingInterval()}</bpmn:timeCycle>
+      </bpmn:timerEventDefinition>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="parse" name="Parse" camunda:delegateExpression="${parseDelegate}">
+      <bpmn:incoming>Flow_1yy5ju2</bpmn:incoming>
+      <bpmn:outgoing>Flow_15q9v3k</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="notify" name="Notify users" camunda:delegateExpression="${notifyDelegate}">
+      <bpmn:incoming>Flow_0tv8bb2</bpmn:incoming>
+      <bpmn:outgoing>Flow_0rshu56</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_15q9v3k" sourceRef="parse" targetRef="Gateway_0pa2iu1"/>
+    <bpmn:exclusiveGateway id="Gateway_0pa2iu1">
+      <bpmn:incoming>Flow_15q9v3k</bpmn:incoming>
+      <bpmn:outgoing>Flow_0tv8bb2</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1xl0f0g</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0tv8bb2" sourceRef="Gateway_0pa2iu1" targetRef="notify">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${decisionDelegate.isNotificationNeeded()}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1xl0f0g" sourceRef="Gateway_0pa2iu1" targetRef="Event_1azeqdg"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="parse_pages">
+      <bpmndi:BPMNShape id="Event_1azeqdg_di" bpmnElement="Event_1azeqdg">
+        <dc:Bounds x="592" y="219" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ena4sr_di" bpmnElement="start">
+        <dc:Bounds x="179" y="219" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="162" y="262" width="75" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1y0h5yl_di" bpmnElement="parse">
+        <dc:Bounds x="270" y="197" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1jl3pb9_di" bpmnElement="notify">
+        <dc:Bounds x="420" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0pa2iu1_di" bpmnElement="Gateway_0pa2iu1" isMarkerVisible="true">
+        <dc:Bounds x="445" y="212" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1yy5ju2_di" bpmnElement="Flow_1yy5ju2">
+        <di:waypoint x="215" y="237" />
+        <di:waypoint x="270" y="237" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0rshu56_di" bpmnElement="Flow_0rshu56">
+        <di:waypoint x="520" y="120" />
+        <di:waypoint x="610" y="120" />
+        <di:waypoint x="610" y="219" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_15q9v3k_di" bpmnElement="Flow_15q9v3k">
+        <di:waypoint x="370" y="237" />
+        <di:waypoint x="445" y="237" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0tv8bb2_di" bpmnElement="Flow_0tv8bb2">
+        <di:waypoint x="470" y="212" />
+        <di:waypoint x="470" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xl0f0g_di" bpmnElement="Flow_1xl0f0g">
+        <di:waypoint x="495" y="237" />
+        <di:waypoint x="592" y="237" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,30 @@
+server:
+  port: 8888
+
+spring:
+  datasource:
+    url: jdbc:h2:./target/local_db;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE
+    username: sa
+    password: sa
+
+ru.lanit.bpm.yodata:
+  bot:
+    name: "LanitPetProject"
+    token: "6348410966:AAF-2kjxhLdQFxrPqCHVPKkl9njNUVYI1Jg"
+  camunda:
+    pageParsingInterval: "R/PT10S"
+    pageParsingMinSendingAmount: 1
+
+camunda:
+  bpm:
+    admin-user:
+      id: admin
+      password: admin
+      first-name: Админ
+      last-name: Админ
+      email: admin@admin.ru
+    job-execution:
+      enabled: true
+
+
+

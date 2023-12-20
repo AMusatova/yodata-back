@@ -1,0 +1,9 @@
+--INSERT INTO users
+-- Здесь нужно подставить Telegram ID тренера, узнать можно у бота @userinfobot https://t.me/userinfobot --
+--VALUES ('user', 'пароль', 'Имя', 'Фамилия', '123456');
+--INSERT INTO pages
+--VALUES (NEXT VALUE FOR sq_pages_id, 'Курс USD', 'https://www.cbr.ru/', '//div[@class=''main-indicator_rate''][2]/div[contains(@class,''mono-num'')][2]/text()');
+--INSERT INTO subscriptions
+--VALUES (NEXT VALUE FOR sq_subscriptions_id, 'user', 1);
+--INSERT INTO parsing_results
+--VALUES (NEXT VALUE FOR sq_parsing_results_id, '2021-01-01','result', 1, false);
