@@ -55,8 +55,7 @@ public class ParsingResultServiceImpl implements ParsingResultService {
             if (!current.getResult().equals(lastRes) && result.indexOf(current.getResult())<0) {
                 result.add(current.getResult());
             } else {
-                current.setSent(null);
-                parsingResultRepository.save(current);
+                parsingResultRepository.deleteById(current.getId());
             }
         });
         return result;

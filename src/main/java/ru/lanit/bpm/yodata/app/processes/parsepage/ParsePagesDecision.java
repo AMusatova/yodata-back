@@ -21,7 +21,7 @@ public class ParsePagesDecision {
 
     public boolean isNotificationNeeded() {
         List<String> unsentResults = parsingResultService.getAllNeededToBeSent();
-        if (unsentResults.size() > camundaConfig.getMinSendingAmount()){
+        if (unsentResults.size() >= camundaConfig.getMinSendingAmount()){
             log.info("Notification is needed");
             return true;
         } else {

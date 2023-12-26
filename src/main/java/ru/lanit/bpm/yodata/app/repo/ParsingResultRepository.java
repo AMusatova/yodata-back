@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ParsingResultRepository extends JpaRepository<ParsingResult, String>, ParsingResultRepositoryCustom {
+public interface ParsingResultRepository extends JpaRepository<ParsingResult, Long>, ParsingResultRepositoryCustom {
 
     List<ParsingResult> findAllBySent(boolean sent);
 

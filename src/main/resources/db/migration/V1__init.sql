@@ -37,12 +37,6 @@ CREATE TABLE parsing_results
 
 create sequence  sq_parsing_results_id start with 1 increment by 1;
 
-CREATE TABLE roles
-(
-    id       VARCHAR(50)  PRIMARY KEY,
-    role_name    VARCHAR(50)  NOT NULL
-);
-
 CREATE TABLE user_roles
 (
     id                BIGINT PRIMARY KEY,

@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:h2:./target/local_db;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE
+    url: jdbc:h2:./target/local_db;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE
     username: sa
     password: sa
 
@@ -12,7 +12,7 @@ ru.lanit.bpm.yodata:
     name: "LanitPetProject"
     token: "6348410966:AAF-2kjxhLdQFxrPqCHVPKkl9njNUVYI1Jg"
   camunda:
-    pageParsingInterval: "R/PT10S"
+    pageParsingInterval: "R/PT30S"
     pageParsingMinSendingAmount: 1
 
 camunda:

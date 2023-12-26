@@ -16,7 +16,7 @@ public class UserRole {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_user_roles_id")
     @SequenceGenerator(name = "sq_user_roles_id", allocationSize = 1)
     private Long id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
     private String role;
